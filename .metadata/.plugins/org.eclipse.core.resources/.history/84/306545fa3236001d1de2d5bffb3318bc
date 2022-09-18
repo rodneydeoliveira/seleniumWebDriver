@@ -1,0 +1,48 @@
+package tests;
+
+import java.util.concurrent.TimeUnit;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class InformacoesUsuario {
+	
+private WebDriver navegador;
+    
+    @Before
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\rodne\\Downloads\\drivers\\chromedriver.exe");
+        // abrindo o navegador
+        navegador = new ChromeDriver();
+        navegador.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        // navegando até a página
+        navegador.get("http://www.juliodelima.com.br/taskit");
+    }
+    @Test
+    public void testAdicionarUmaInformacaoAdicionalDoUsuario () {
+
+
+        // clicando no botão Sign in
+        navegador.findElement(By.linkText("Sign in")).click();
+        navegador.findElement(By.id("login-sign-in")).sendKeys("rodneydeoliveira");
+        navegador.findElement(By.id("password-sign-in")).sendKeys("Sharkman17!");
+        navegador.findElement(By.id("btn-submit-sign-in")).click();
+        navegador.findElement(By.xpath("/html/body/nav/div/div/ul[1]/li[3]/a")).isEnabled();
+        
+        // clicar no Oi, Rodney
+        navegador.findElement(By.cssSelector("a[class='me']")).click();
+        navegador.findElement(By.linkText("MORE DATA ABOUT YOU")).click();
+        navegador.findElement(By.cssSelector("[id=\"moredata\"] button")).click();
+        navegador.findElement(By.cssSelector(".browser-default [value='phone']")).click();
+        navegador.findElement(By.name("contact")).sendKeys("119999999999");
+        }
+    /*@After
+    public void tearDown() {
+        navegador.quit();
+
+    }*/
+}
